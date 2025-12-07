@@ -1,0 +1,42 @@
+
+
+
+## Systemd Service for Tomcat (root)
+```
+sudo vi /etc/systemd/system/tomcat.service
+```
+```
+[Unit]
+Description=Apache Tomcat Service
+After=network.target
+
+[Service]
+Type=forking
+User=root
+Group=root
+
+Environment="JAVA_HOME=/usr/java/jdk-17.0.2"
+Environment="CATALINA_HOME=/usr/local/apache-tomcat-9.0.54"
+Environment="CATALINA_BASE=/usr/local/apache-tomcat-9.0.54"
+Environment="CATALINA_PID=/usr/local/apache-tomcat-9.0.54/temp/tomcat.pid"
+Environment="JAVA_OPTS=-Djava.security.egd=file:/dev/./urandom"
+
+ExecStart=/usr/local/apache-tomcat-9.0.54/bin/startup.sh
+ExecStop=/usr/local/apache-tomcat-9.0.54/bin/shutdown.sh
+
+Restart=on-failure
+#RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
+```
+
+## Reload systemd & Start Tomcat
+```
+sudo systemctl daemon-reload
+sudo systemctl start tomcat
+sudo systemctl enable tomcat
+sudo systemctl status tomcat
+```
+
+

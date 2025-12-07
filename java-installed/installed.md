@@ -1,7 +1,7 @@
 ## Java 17.0.2 Installation Guide on CentOS
 ## Prerequisites
 ## Root or sudo access to the server
-## Java JDK 17.0.2 tar.gz file downloaded
+## Java openJDK 17.0.2 tar.gz file downloaded
 ## Create Java Installation Directory
 ```
 sudo mkdir -p /usr/java

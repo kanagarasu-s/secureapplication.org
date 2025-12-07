@@ -40,7 +40,7 @@ sudo systemctl status tomcat
 sudo firewall-cmd --add-port=8080/tcp --permanent
 sudo firewall-cmd --reload
 ```
-## Script
+## Create Apache Tomcat Status Script
 ```
 sudo vi /usr/local/bin/tomcat_status.sh
 ```
@@ -53,7 +53,7 @@ else
   echo "tomcat_status 0" > /var/lib/node_exporter/textfile_collector/tomcat_status.prom
 fi
 ```
-## excute permission shell script
+## Script Execution Permission
 ```
 sudo chmod +x /usr/local/bin/tomcat_status.sh
 ```
@@ -62,11 +62,22 @@ sudo systemctl start tomcat.service
 sudo /usr/local/bin/tomcat_status.sh
 cat /var/lib/node_exporter/textfile_collector/tomcat_status.prom
 ```
-## cronjob automatically
+## cronjob for Auto Execution
 ```
 sudo crontab -e
 ```
 ```
 */1 * * * * /usr/local/bin/tomcat_status.sh
+```
+## Prometheus Alert Rule for Apache Tomcat
+```
+- alert: TomcatServiceDown
+    expr: tomcat_status == 0
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+      summary: "Tomcat Service DOWN"
+      description: "Tomcat service is not running on instance: {{$labels.instance}}"
 ```
 

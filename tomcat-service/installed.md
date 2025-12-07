@@ -38,5 +38,9 @@ sudo systemctl start tomcat
 sudo systemctl enable tomcat
 sudo systemctl status tomcat
 ```
-
+## Allow 8080 Port
+```
+sudo firewall-cmd --add-port=8080/tcp --permanent
+sudo firewall-cmd --reload
+```
 

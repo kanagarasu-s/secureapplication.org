@@ -62,12 +62,57 @@ sudo systemctl start tomcat.service
 sudo /usr/local/bin/tomcat_status.sh
 cat /var/lib/node_exporter/textfile_collector/tomcat_status.prom
 ```
+## create the directory and set correct permissions
+```
+sudo mkdir -p /var/lib/node_exporter/textfile_collector
+sudo chown root:root /var/lib/node_exporter/textfile_collector
+```
+## Then run your script again:
+```
+sudo /usr/local/bin/tomcat_status.sh
+```
+## Verify output exists:
+```
+cat /var/lib/node_exporter/textfile_collector/tomcat_status.prom
+```
+## Ensure Node Exporter is configured for textfile collector
+```
+sudo systemctl status node_exporter
+```
+```
+sudo vi /etc/systemd/system/node_exporter.service
+```
+```
+[Unit]
+Description=Node Exporter
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=nodeusr
+Group=nodeusr
+Type=simple
+ExecStart=/usr/local/bin/node_exporter \
+ --collector.textfile.directory=/var/lib/node_exporter/textfile_collector
+
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
+## service restart again:
+```
+sudo systemctl daemon-reload
+sudo systemctl restart node_exporter
+sudo systemctl status node_exporter
+```
+
 ## cronjob for Auto Execution
 ```
 sudo crontab -e
 ```
 ```
-*/1 * * * * /usr/local/bin/tomcat_status.sh
+* * * * * /usr/local/bin/tomcat_status.sh
 ```
 ## Prometheus Alert Rule for Apache Tomcat
 ```
@@ -81,3 +126,14 @@ sudo crontab -e
       description: "Tomcat service is not running on instance: {{$labels.instance}}"
 ```
 
+## many server start services tomcat
+```
+- alert: TomcatServiceDown
+    expr: tomcat_status{instance=~"192.168.55.(51|47|52):9100"} == 0
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+      summary: "Tomcat DOWN on {{ $labels.instance }}"
+      description: "Tomcat service is not running on {{ $labels.instance }}. Please check the service immediately."
+```

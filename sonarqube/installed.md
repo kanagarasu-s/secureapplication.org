@@ -143,10 +143,34 @@ http://192.168.55.160:9000/
 jenkins manage--> credentials
 ```
 
-
 <img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/b2be33b0-89a9-43c8-93ea-c29c98afa33c" />
 
+## configure sonarqube server
 
+```
+manage jenkins --> system
+```
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/6255fcda-faf9-4280-a9d6-f14e25972fff" />
 
+## configure sonarqube scanner
+```
+jenkins manager --> tools
+```
+
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/4a18103d-e60e-4ef2-b923-0a0ad64892fe" />
+
+## add jenkins pipeline
+
+```
+stage('Sonar scanner') {
+            steps {
+                withSonarQubeEnv('sonar-scanner') {
+                  sh """ $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName-demo-security \
+                    -Dsonar.java.binaries=. \
+                    -Dsonar.projectKey=demo-security """
+                }
+            }
+        }
+```
 
 

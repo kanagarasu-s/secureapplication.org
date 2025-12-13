@@ -112,6 +112,41 @@ docker compose exec app bash
 http://192.168.55.160:9000/
 ```
 ## sonarqueb login
-<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/03bad1c7-c036-438f-bb11-7e1e53127673" />
+
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/08a584a1-bb96-442b-a23c-0b92f5603148" />
+
+## sonarqube change password
+
+## sonarqube homepage
+
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/7ddf34a4-8846-4e84-b1c8-11cab37629b7" />
+
+## soanrqube create user token
+
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/984d306a-17b7-49da-b5b3-d2ed6a8aad98" />
+
+## sonarqube click token
+
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/71939691-f0bc-48f0-93ae-f11dedd21684" />
+
+## cope token
+
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/e1d3eccd-5cf3-400c-a47b-2f610712eaf0" />
+
+## install plugin sonarqube and quilty in jenkins
+
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/9bbc9117-9cee-445a-bb06-72a2d3618d57" />
+
+## add sonarqube token in jenkins
+
+```
+jenkins manage--> credentials
+```
+
+
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/b2be33b0-89a9-43c8-93ea-c29c98afa33c" />
+
+
+
 
 
